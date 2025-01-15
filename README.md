@@ -1,6 +1,6 @@
 # blender_colonoscopy
 
-# Projects 3: Using synthetic surgical data from Blender to train a polyp detection model
+# Project 3: Using synthetic surgical data from Blender to train a polyp detection model
 Project owner: [Ruaridh Gollifer](https://github.com/ruaridhg)
 
 ## Project details
