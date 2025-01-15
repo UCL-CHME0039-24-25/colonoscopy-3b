@@ -59,7 +59,7 @@ more realistic data. The list and size of data includes:
 - polyps.zip (~11.56GB) contain training data as .png
 - examples.blend (~15.67MB) contains .avi videos of colonoscopy and laparoscopy data
 
-[Open-source real world datasets are also required for evaluation.](/projects3_4/data/README.md)
+Open-source real world datasets are also required for evaluation.
 
 * **Data preparation and cleaning:**   
 The synthetic data provided by Blender needs to be rendered in .png format and for the polyp detection task there needs to be 2 files generated per video frame:
