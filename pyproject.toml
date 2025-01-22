@@ -20,7 +20,6 @@ classifiers = [
   "Programming Language :: Python"
 ]
 dependencies = [
-    "blender-randomiser@git+https://github.com/UCL/Blender_Randomiser.git@hackathon-additions",
     "cv2",
     "numpy",
     "matplotlib",
