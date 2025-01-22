@@ -3,6 +3,13 @@
 # Project 3: Using synthetic surgical data from Blender to train a polyp detection model
 Project owner: [Ruaridh Gollifer](https://github.com/ruaridhg)
 
+## Blender tutorials on Moodle
+
+- [Blender Scripting Tab with UI](https://moodle.ucl.ac.uk/mod/helixmedia/view.php?id=7178052)
+- [Blender Materials panel/tab walkthrough](https://moodle.ucl.ac.uk/mod/helixmedia/view.php?id=7178062)
+- [Blender Geometry Panel Basic](https://moodle.ucl.ac.uk/mod/helixmedia/view.php?id=7178073)
+- [Blender Geometry advanced recursive nodes](https://moodle.ucl.ac.uk/mod/helixmedia/view.php?id=7178145)
+
 ## Project details
 Image Guided Surgery (IGS) researchers use machine learning in some form (registration, segmentation,
 stereo reconstruction, classification etc.) with polyp detection in image guided colonoscopy surgery
