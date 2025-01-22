@@ -1,0 +1,72 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "blender_colon"
+dynamic = ["version", "readme"]
+requires-python = ">=3.12"
+keywords = ["AI"]
+authors = [
+  {name = "Ruaridh Gollifer", email = "r.gollifer@ucl.ac.uk"},
+  {name = "Miguel Xochicale", email = "m.xochicale@ucl.ac.uk"},
+]
+maintainers = [
+  {name = "Add maintener", email = "add@email.com"}
+]
+description = "Package example!"
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python"
+]
+dependencies = [
+    "cv2",
+    "numpy",
+    "matplotlib",
+    "loguru",
+    "opencv-python-headless",
+    "nltk",
+    "pandas",
+    "PyQt5",# for FigureCanvasAgg interactivity problem
+    "certifi",
+    "torch",
+    "omegaconf",
+    "torchvision",
+    "scikit-learn",
+    "onnxruntime",
+]
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "pylint",
+    "black",
+    "isort",
+    "codespell",
+    "pre-commit",
+    "pytest-blender",
+]
+learning = [
+    "torch",
+    "torchvision",
+    "scikit-learn",
+    "pretrainedmodels",
+    #"einops",
+]
+
+[tool.setuptools.dynamic]
+#version = {attr = "blender_colon.__version__"} #todo check this version attribute!
+readme = {file = ["README.md"]}
+
+[tool.setuptools.packages.find]
+where = ["src"]  # list of folders that contain the packages (["."] by default)
+include = ["blender_colon"]  # package names should match these glob patterns (["*"] by default)
+#exclude = ["blender_colon.tests*"]  # exclude packages matching these glob patterns (empty by default)
+namespaces = false  # to disable scanning PEP 420 namespaces (true by default)
+
+[tool.pytest]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v"
+pythonpath = [
+    "src"
+]

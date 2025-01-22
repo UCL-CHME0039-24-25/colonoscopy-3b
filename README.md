@@ -3,6 +3,21 @@
 # Project 3: Using synthetic surgical data from Blender to train a polyp detection model
 Project owner: [Ruaridh Gollifer](https://github.com/ruaridhg)
 
+## Blender Randomiser Add-on tutorials on Moodle
+
+These are the areas to focus on for the Blender part of the project:
+
+- [Blender Scripting Tab with UI](https://moodle.ucl.ac.uk/mod/helixmedia/view.php?id=7178052)
+- [Blender Materials panel/tab walkthrough](https://moodle.ucl.ac.uk/mod/helixmedia/view.php?id=7178062)
+- [Blender Geometry Panel Basic](https://moodle.ucl.ac.uk/mod/helixmedia/view.php?id=7178073)
+- [Blender Geometry advanced recursive nodes](https://moodle.ucl.ac.uk/mod/helixmedia/view.php?id=7178145)
+
+Example of how to render data using Blender by running the run_RandomiserBlender.sh script:
+
+```bash
+bash run_RandomiserBlender.sh -blend ../../datasets/blend_files/colon.blend -json_in ../input_files/input_bounds_hackathon.json -json_out ../output_files/test_docker.json -seed 32 -frame 10 -basename ../output_files/docker_output_frame -render_main
+```
+
 ## Project details
 Image Guided Surgery (IGS) researchers use machine learning in some form (registration, segmentation,
 stereo reconstruction, classification etc.) with polyp detection in image guided colonoscopy surgery
