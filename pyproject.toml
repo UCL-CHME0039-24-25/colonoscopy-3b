@@ -9,7 +9,7 @@ requires-python = ">=3.12"
 keywords = ["AI"]
 authors = [
   {name = "Ruaridh Gollifer", email = "r.gollifer@ucl.ac.uk"},
-  {name = "Add co-author", email = "add@email.com"},
+  {name = "Miguel Xochicale", email = "m.xochicale@ucl.ac.uk"},
 ]
 maintainers = [
   {name = "Add maintener", email = "add@email.com"}
