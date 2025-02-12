@@ -1,0 +1,40 @@
+services:
+  docker-daemon:
+    container_name: "dev-docker-daemon"
+    environment:
+      DOCKER_TLS_CERTDIR: ""
+      DOCKER_BUILDKIT: 1
+      DOCKER_CLI_EXPERIMENTAL: enabled
+    image: "docker:dind"
+    networks:
+      "dev-network":
+        aliases:
+          - "docker"
+    privileged: true
+  main_container:
+    build:
+      context: ../
+      dockerfile: .devcontainer/Dockerfile
+      args:
+        USER: ${USER}
+        HOST_UID: ${HOST_UID}
+      platforms:
+        - linux/amd64
+        - linux/arm64
+    image: "main-devenv:latest"
+    container_name: main-devenv
+    depends_on:
+      - "docker-daemon"
+    environment:
+      - DOCKER_HOST=tcp://docker:2375
+      - DOCKER_BUILDKIT=1
+      - DOCKER_CLI_EXPERIMENTAL=enabled
+    networks:
+      "dev-network": {}
+    volumes:
+      - ${PWD}/..:/home/${USER}/workspace
+      - ${HOME}/.ssh:/home/${USER}/.ssh
+
+networks:
+  "dev-network":
+    name: "dev-network"
