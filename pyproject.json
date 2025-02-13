@@ -1,0 +1,17 @@
+{
+    "authors_list": ["Sunny Park <sunny.park@ucl.ac.uk>"],
+    "license": "MIT",
+    "repo_url": "https://github.com/sungshic/projtemplate-python",
+    "bugtracker_url": "https://github.com/sungshic/projtemplate-python/issues",
+    "changelog_url": "https://github.com/sungshic/projtemplate-python/blob/main/CHANGELOG.md",
+    "doc_url": "https://projtemplate-python.readthedocs.io",
+    "classifiers_list": [
+        "Development Status :: 3 - Alpha",
+        "Intended Audience :: Developers",
+        "Natural Language :: English",
+        "Operating System :: OS Independent",
+        "Topic :: Software Development :: Libraries",
+        "License :: OSI Approved :: MIT License",
+        "Programming Language :: Python :: 3.12"
+    ]
+}

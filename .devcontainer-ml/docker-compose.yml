@@ -14,7 +14,7 @@ services:
   main_container:
     build:
       context: ../
-      dockerfile: .devcontainer/Dockerfile
+      dockerfile: .devcontainer-ml/Dockerfile
       args:
         USER: ${USER}
         HOST_UID: ${HOST_UID}
