@@ -12,7 +12,7 @@ SHELL ["/bin/bash", "-cu"]
 
 RUN apt-get update && apt-get install -y python3 python3-pip
 RUN apt install -y vim vim-gtk3
-RUN apt install libegl1-mesa
+RUN apt install -y libegl1-mesa
 # Update and install Blender
 RUN apt-get install -y blender
 
