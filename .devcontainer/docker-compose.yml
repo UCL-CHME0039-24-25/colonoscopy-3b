@@ -1,7 +1,7 @@
 services:
   main_container:
-    image: blender_colon:latest
-    container_name: blender_colon_v0.0.1
+    image: blender_colonoscopy:latest
+    container_name: blender_colonoscopy_v0.0.1
     build:
       context: ..
       # cache_from:
