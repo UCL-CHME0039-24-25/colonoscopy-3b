@@ -3,7 +3,7 @@ requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "blender_colon"
+name = "blender_colonoscopy"
 dynamic = ["version", "readme"]
 requires-python = ">=3.12"
 keywords = ["AI"]
@@ -20,11 +20,9 @@ classifiers = [
   "Programming Language :: Python"
 ]
 dependencies = [
-    "cv2",
     "numpy",
     "matplotlib",
     "loguru",
-    "opencv-python-headless",
     "nltk",
     "pandas",
     "PyQt5",# for FigureCanvasAgg interactivity problem
@@ -54,13 +52,13 @@ learning = [
 ]
 
 [tool.setuptools.dynamic]
-#version = {attr = "blender_colon.__version__"} #todo check this version attribute!
+#version = {attr = "blender_colonoscopy.__version__"} #todo check this version attribute!
 readme = {file = ["README.md"]}
 
 [tool.setuptools.packages.find]
 where = ["src"]  # list of folders that contain the packages (["."] by default)
-include = ["blender_colon"]  # package names should match these glob patterns (["*"] by default)
-#exclude = ["blender_colon.tests*"]  # exclude packages matching these glob patterns (empty by default)
+include = ["blender_colonoscopy"]  # package names should match these glob patterns (["*"] by default)
+#exclude = ["blender_colonoscopy.tests*"]  # exclude packages matching these glob patterns (empty by default)
 namespaces = false  # to disable scanning PEP 420 namespaces (true by default)
 
 [tool.pytest]

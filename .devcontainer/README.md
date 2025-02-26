@@ -1,23 +1,33 @@
 ## Docker and data management
 
 ### Build
+```bash
+docker compose -f docker-compose.yml build #Building estimated time for 17 items ~1473s
+	# => => # Downloading torch-2.6.0-cp312-cp312-manylinux1_x86_64.whl (766.6 MB)
+	# => => # Downloading nvidia_cublas_cu12-12.4.5.8-py3-none-manylinux2014_x86_64.whl (363.4 MB)
+	# => => # Downloading nvidia_cuda_nvrtc_cu12-12.4.127-py3-none-manylinux2014_x86_64.whl (24.6 MB)
+	# => => # Downloading nvidia_cuda_runtime_cu12-12.4.127-py3-none-manylinux2014_x86_64.whl (883 kB)
+	# => => # Downloading nvidia_cudnn_cu12-9.1.0.70-py3-none-manylinux2014_x86_64.whl (664.8 MB)
+	# => => # Downloading nvidia_cusparselt_cu12-0.6.2-py3-none-manylinux2014_x86_64.whl (150.1 MB)
+docker images
+	#REPOSITORY   TAG     IMAGE ID      CREATED         SIZE
+	#blender_colonoscopy        latest  <ID>          current_time    12GB
 ```
-docker compose -f docker-compose.yml build #Building estimated time #
 
-#$docker images
-#REPOSITORY   TAG     IMAGE ID      CREATED         SIZE
-#blender_colon        latest  <ID>          current_time    16.8GB
-```
-
-### Launch and test image
+### Launch, test, stop and remove image
 ```
 bash launch_image.bash
+bash stop_container_and_removeit.bash
 ```
 
 ## Save the built image into a tar file
 ```
-docker save -o blender_colon-image.tar blender_colon:latest
-#blender_colon-image.tar [16G]
+DATE=$(date --iso-8601)
+docker save -o blender_colonoscopy_image_${DATE}.tar blender_colonoscopy:latest
+#├── [ 11G]  blender_colonoscopy_image_2025-02-19.tar
+tar -czvf blender_colonoscopy_image_${DATE}.tar.gz blender_colonoscopy_image_${DATE}.tar
+#├── [7.0G]  blender_colonoscopy_image_2025-02-19.tar.gz
+#tar -xzvf *.tar.gz extract files
 ```
 
 ## Copy image to airlock
