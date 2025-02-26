@@ -1,0 +1,10 @@
+*.swo
+*.swp
+*.swn
+.venv
+__pycache__
+.pytest_cache
+build
+**/*.egg-info/
+*.tar
+*.tar.gz
