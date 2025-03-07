@@ -19,8 +19,8 @@ RUN  sudo gdebi libegl1-mesa_23.0.4-0ubuntu1.22.04.1_amd64.deb libgl1-mesa-glx_2
 RUN apt-get install -y blender
 
 ## python package build
-WORKDIR /blender_laparoscopy
-COPY . /blender_laparoscopy
+WORKDIR /blender_colonoscopy
+COPY . /blender_colonoscopy
 RUN pip install --upgrade pip
 RUN pip install --editable ".[test, learning]"
 ## Blender setup
