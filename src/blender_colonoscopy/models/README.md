@@ -1,2 +1,1 @@
-The pre-trained yolov7_training.pt model is needed
-and can be downloaded from the [Blender Randomiser repository](https://github.com/UCL/Blender_Randomiser/blob/main/example_pipeline/yolov7_training_config.yaml).
+The pre-trained yolov7_training.pt model is currently available on the CHME0039_24-25: 3b Moodle: https://moodle.ucl.ac.uk/mod/resource/view.php?id=7207884
