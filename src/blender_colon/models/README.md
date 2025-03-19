@@ -1,2 +1,0 @@
-The pre-trained yolov7_training.pt model is needed
-and can be downloaded from the [Blender Randomiser repository](https://github.com/UCL/Blender_Randomiser/blob/main/example_pipeline/yolov7_training_config.yaml).
