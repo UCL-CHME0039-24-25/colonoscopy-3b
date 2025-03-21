@@ -1,3 +1,8 @@
+import os
+import shutil
+import random
+from glob import glob
+
 # Define base paths
 base_path = r"C:\Users\Kate\OneDrive - TCDUD.onmicrosoft.com\Documents\UCL\Group Project\Data\hk_data"
 image_folder = os.path.join(base_path, "images")  # Source images folder
