@@ -1,0 +1,11 @@
+docker load -i /home/rmhipmc/shared/updated-tre-image.tar
+
+sudo nvidia-ctk cdi generate --output=/etc/cdi/nvidia.yaml
+
+docker run -it --rm --privileged --device nvidia.com/gpu=GPU-4af3dfa2-c9d0-9d36-94bc-27ca942ab502 \ 
+--security-opt=label=disable --shm-size=16g \ 
+-v /home/rmhipmc/shared/yolov7_3b-demo_tre:/app \
+-v /home/rmhipmc/shared/allreadwrite/data/LDPolyps:/home/rmhipmc/shared/allreadwrite/data/LDPolyps \
+-w /app cab569f23209 bash shell_ld_run_1.sh  # change Docker image ID and shell script as needed
+
+# Note: GPU node name changes each time you access TRE - run commands 'cat /etc/cdi/nvidia.yaml' to select up to data node name
