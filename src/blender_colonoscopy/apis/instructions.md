@@ -1,64 +1,75 @@
-This is an example pipeline on how to convert output from Blender Randomiser to COCO format labelling in preperation of fine tuning polyps detection using YOLOv7
+This is an example pipeline on how to convert output from Blender Randomiser to correct format labelling in preperation of fine tuning polyps detection using YOLOv7
 
 # Data Preperation
 Once the segmentation of polyps are obtained. Use find_bounding_box.ipynb to output the bounding box information as text files.
 
 show_bbox.ipynb can be used to show if the correct bounding boxes have been converted.
 
-# IMPORTANT!
-**<span style="color:red">
-When Google Colab session finishes, ALL data is wiped, please save the models!
-</span>**
-## To tune the model using custom data:
-- This is done already within the Dockerfile (git clone https://github.com/WongKinYiu/yolov7; pip install -r requirements.txt)
-- log into wandb account (your own API - see below) DO NOT SHARE!
-- run python training script
+# Run Model on Google Colab
+Download and run the notebook run_yolov7.ipynb (src/notebooks).
 
-```python train.py --epochs 100 --device 0 --entity colon_coders --workers 8 --batch-size 32 --data /content/colon.yaml --img 512 512 --cfg /content/yolov7_training_config.yaml --weights '/content/yolov7_training.pt' --name yolov7-colon --hyp data/hyp.scratch.custom.yaml```
+All file paths are written in line with the mini synthetic dataset uploaded to the shared Google Drive:
+https://drive.google.com/drive/folders/1fnNzX_f9nYCxA347kb-HlZQIuCuCV2Zh?usp=drive_link
 
-N.B. yolov7_training.pt is a large file that it not included in the repository so you will need to get this from me separately. It is the pre-trained model that is used to fine tune the model.
 
-## Google colab instructions
-- upload polyps.zip to google drive
-- upload colon.yaml, yolov7_training.pt, yolov7_training_config.yaml to google drive
-- open google colab and mount drive
-- unzip polyps.zip
-```python
-import zipfile
-with zipfile.ZipFile("/content/drive/MyDrive/polyps.zip", 'r') as zip_ref:
-    zip_ref.extractall("/content/colon_data")
+
+
+### High-level overview outlined below:
+
+Mount drive:
+``` shell
+from google.colab import drive
+drive.mount('/content/gdrive')
+%cd /content/gdrive/MyDrive
 ```
-- Important: remove the cache files (otherwise the model will use the cache file to load the data which has the incorrect file paths)
-- could use to code in show_bbox.ipynb to see if data and bounding boxes has been loaded correctly
-- install yolo7
-```python
+
+Clone this repo:
+``` shell
+#If you've already cloned the repo in a previous session and it's in your Google Drive, you don’t need to clone it again
+
 !git clone https://github.com/WongKinYiu/yolov7
+```
+
+Navigate to repo folder and install requirements
+``` shell
 %cd yolov7
 !pip install -r requirements.txt
 ```
-- set up wandb
-```python
-!pip install wandb
-import wandb
-wandb.login()
+
+Train model
+``` shell
+#Update name (--name colon_run_X) with each run
+
+!python train.py --epochs 100 --device 0 --workers 8 --batch-size 32 --data /content/gdrive/MyDrive/Colab_Notebooks/Group_Project/polyp_people/code/ml_code/data_yaml_files/mini_synthetic.yaml --img 512 512 --cfg config_train_yolov7.yaml --weights /content/gdrive/MyDrive/Colab_Notebooks/Group_Project/polyp_people/code/ml_code/yolov7_training.pt --name colon_run_X --hyp data/hyp.scratch.custom.yaml
 ```
-- tune model: make sure colon.yaml has the correct file paths for data, also make sure --data, --cfg and --weights has the correct file paths
+Test model
+``` shell
+#Update weights path (--weights runs/train/colon_run_X/) with name as per previous cell with each run
+#Update validation run name (--name colon_test_X)
 
-```python train.py --epochs 100 --device 0 --entity colon_coders --workers 8 --batch-size 32 --data /content/colon.yaml --img 512 512 --cfg /content/yolov7_training_config.yaml --weights '/content/yolov7_training.pt' --name yolov7-colon --hyp data/hyp.scratch.custom.yaml```
-- When training is finished, model output is saved under yolov7/runs/train
+!python test.py --data /content/gdrive/MyDrive/Colab_Notebooks/Group_Project/polyp_people/code/ml_code/data_yaml_files/mini_synthetic.yaml --img 512 --batch 32 --conf 0.001 --iou 0.65 --device 0 --weights runs/train/colon_run_X/weights/best.pt --name colon_test_X
+```
 
-## Run on test data
-!python test.py --data /content/colon.yaml --img 512 --batch 32 --conf 0.001 --iou 0.65 --device 0 --weights runs/train/yolov7-colon2/weights/best.pt --name yolov7_colon_val
+Inference (generate bounding boxes)
+``` shell
+#Update source file path (--source) to image or folder of images for which you want to generate bounding boxes.
+#Update weights path (--weights runs/train/colon_run_X/) for saved model.
 
-## Notes
-- The data location is specified in the config file colon.yaml
-- Training config is specified in yolov7_training_config.yaml
+!python detect.py --source /content/gdrive/MyDrive/Colab_Notebooks/Group_Project/polyp_people/data/Synthetic/mini_synthetic_data/images/valid/ --weights runs/train/colon_run_X/weights/best.pt --conf 0.25 --name polyp_detect_X
+```
 
-## Weights and Biases
-Weights and Biases is a very good tool to use to track training progress. YoloV7 uses this tool and it is very easy to set up
-- https://wandb.ai/site/research sign up for the free account
-- log into your account, go to top right, under your name select "user profile"
-- go to section "danger zone" and reveal your API code
-- this code is then used to log in to wandb when prompted
-- when you finish you can change the API or throw it away.
-- when training is in progress, go to WandB website, click on top left, you should see the project YOLO which will show the current training session
+Save model
+``` shell
+#Update model path (colon_run_X) accordingly
+#The first file path specifies where the file/folder is currently located
+#The second file path specifies where it is to be saved down
+
+#Save best model weights
+!cp runs/train/colon_run_X/weights/best.pt /content/gdrive/MyDrive/Colab_Notebooks/Group_Project/polyp_people/runs/train/colon_run_X.pt
+
+#Save test folder
+!cp -r runs/test/colon_test_X /content/gdrive/MyDrive/Colab_Notebooks/Group_Project/polyp_people/runs/test/colon_test_X
+
+#Save images with bounding boxes (inference)
+!cp -r runs/detect/polyp_detect_X /content/gdrive/MyDrive/Colab_Notebooks/Group_Project/polyp_people/runs/detect/colon_detect_X
+```
