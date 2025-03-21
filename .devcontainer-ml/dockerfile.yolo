@@ -1,0 +1,32 @@
+# Dockerfile.extend
+
+# 1. Start from a CUDA-enabled PyTorch base image
+FROM pytorch/pytorch:1.13.1-cuda11.6-cudnn8-runtime
+
+# 2. Install system-level dependencies (including OpenCV dependencies and libglib2.0-0 for libgthread)
+RUN apt-get update && apt-get install -y \
+    libgl1-mesa-glx \
+    libglib2.0-0 \
+    && rm -rf /var/lib/apt/lists/*
+
+
+# 3. Install Python packages required for YOLOv7 and the basic TRE image
+# Force a NumPy 1.x version to avoid compatibility issues.
+RUN pip install --no-cache-dir \
+    numpy==1.23.5 \
+    tensorboard \
+    opencv-python \
+    torchvision \
+    matplotlib \
+    Pillow \
+    PyYAML \
+    requests \
+    scipy \
+    tqdm \
+    "protobuf<4.21.3" \
+    seaborn \
+    psutil \
+    thop \
+    ipython \
+    pandas \
+    scikit-learn
